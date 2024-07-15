@@ -24,7 +24,7 @@ pipeline {
         }
         stage('deployment') {
             steps {
-                bat 'docker run -d -p 9090:8080 app1c app1'
+                bat 'docker run -d -p 9090:8080 app1c app1:latest'
             }
         }
        
