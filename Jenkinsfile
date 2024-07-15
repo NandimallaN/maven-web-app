@@ -1,8 +1,6 @@
 pipeline {
   
-    agent {
-        label 'Ansible-Node'
-    }
+   
     
     tools{
         maven "M3"
@@ -11,23 +9,24 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-               git 'https://github.com/ashokitschool/maven-web-app.git'
+               git ' https://github.com/NandimallaN/maven-web-app.git'
             }
         }
         stage('Build') {
             steps {
-               sh 'mvn clean package'
+               bat 'mvn clean package'
             }
         }
-        
-        stage('Create Image'){
-            steps{
-               steps {
-                	script {
-                		sh 'ansible-playbook task.yml'
-                	}
-                }
+        stage('docker image') {
+            steps {
+                bat 'docker build -t imagename .'
             }
         }
+        stage('deployment') {
+            steps {
+                bat 'docker run -d -p 9090:8080 imaagec imagename'
+            }
+        }
+       
     }
 }
