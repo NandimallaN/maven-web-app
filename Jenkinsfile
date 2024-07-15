@@ -19,12 +19,12 @@ pipeline {
         }
         stage('docker image') {
             steps {
-                bat 'docker build -t imagename .'
+                bat 'docker build -t app1 .'
             }
         }
         stage('deployment') {
             steps {
-                bat 'docker run -d -p 9090:8080 imaagec imagename'
+                bat 'docker run -d -p 9090:8080 app1c app1'
             }
         }
        
